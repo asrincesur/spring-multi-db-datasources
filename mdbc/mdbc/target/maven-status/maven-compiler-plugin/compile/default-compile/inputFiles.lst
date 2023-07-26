@@ -1,8 +1,0 @@
-C:\Users\9500170\Desktop\mdbc\mdbc\src\main\java\com\std\mdbc\models\IUser.java
-C:\Users\9500170\Desktop\mdbc\mdbc\src\main\java\com\std\mdbc\models\secondaries\UserLite.java
-C:\Users\9500170\Desktop\mdbc\mdbc\src\main\java\com\std\mdbc\repos\secondaryrepo\LiteRepository.java
-C:\Users\9500170\Desktop\mdbc\mdbc\src\main\java\com\std\mdbc\repos\PrimaryRepo\H2Repository.java
-C:\Users\9500170\Desktop\mdbc\mdbc\src\main\java\com\std\mdbc\models\primaries\UserH2.java
-C:\Users\9500170\Desktop\mdbc\mdbc\src\main\java\com\std\mdbc\RepoConfig\h2DbConf.java
-C:\Users\9500170\Desktop\mdbc\mdbc\src\main\java\com\std\mdbc\MdbcApplication.java
-C:\Users\9500170\Desktop\mdbc\mdbc\src\main\java\com\std\mdbc\RepoConfig\LiteConf.java

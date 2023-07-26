@@ -1,8 +1,0 @@
-com\std\mdbc\repos\PrimaryRepo\H2Repository.class
-com\std\mdbc\models\secondaries\UserLite.class
-com\std\mdbc\RepoConfig\h2DbConf.class
-com\std\mdbc\MdbcApplication.class
-com\std\mdbc\models\primaries\UserH2.class
-com\std\mdbc\models\IUser.class
-com\std\mdbc\repos\secondaryrepo\LiteRepository.class
-com\std\mdbc\RepoConfig\LiteConf.class
