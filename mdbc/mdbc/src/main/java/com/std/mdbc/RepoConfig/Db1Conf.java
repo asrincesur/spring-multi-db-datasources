@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
+import java.util.Objects;
 
 @Configuration
 @EnableTransactionManagement
@@ -39,11 +40,25 @@ public class Db1Conf {
 
     @Bean(name = "h2memEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean h2EntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        return builder
+
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setGenerateDdl(true);
+
+
+        LocalContainerEntityManagerFactoryBean builder1 = builder
                 .dataSource(dataSource())
                 .packages("com.std.mdbc.models.primaries")
                 .persistenceUnit("UserH2")
                 .build();
+        builder1.setJpaVendorAdapter(vendorAdapter);
+
+        HashMap<String, Object> properties = new HashMap<>();
+
+        properties.put("hibernate.hbm2ddl.auto","update");
+        properties.put("hibernate.dialect","org.hibernate.dialect.H2Dialect");
+        properties.put("spring.jpa.show-sql","true");
+        builder1.setJpaPropertyMap(properties);
+        return builder1;
     }
 
     @Bean(name = "h2memTransactionManager")

@@ -1,24 +1,27 @@
 package com.std.mdbc.models.secondaries;
-import com.std.mdbc.models.IUser;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data//    @Column(name="isactive")
+//    private Boolean isActive;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDb2 implements IUser {
+@Table(name="p_user2")
+@SequenceGenerator(name ="seq2")
+public class UserDb2 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+    private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name="isactive")
     private Boolean isActive;
 
     // getter-setter ve diğer alanlar

@@ -1,5 +1,4 @@
 package com.std.mdbc.models.primaries;
-import com.std.mdbc.models.IUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +8,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserH2 implements IUser {
+@Table(name="p_user")
+@SequenceGenerator(name ="seq1")
+public class UserH2 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
 
+    @Column(name = "NAME")
     private String name;
 
     // getter-setter ve diğer alanlar
