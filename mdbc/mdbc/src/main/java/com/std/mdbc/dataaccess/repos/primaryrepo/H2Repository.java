@@ -1,4 +1,4 @@
-package com.std.mdbc.repos.PrimaryRepo;
+package com.std.mdbc.dataaccess.repos.primaryrepo;
 
 import com.std.mdbc.models.primaries.UserH2;
 import org.springframework.data.jpa.repository.JpaRepository;

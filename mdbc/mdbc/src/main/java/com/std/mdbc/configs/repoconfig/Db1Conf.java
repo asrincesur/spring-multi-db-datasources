@@ -1,5 +1,6 @@
-package com.std.mdbc.RepoConfig;
+package com.std.mdbc.configs.repoconfig;
 
+import ch.qos.logback.core.model.processor.PhaseIndicator;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,16 +18,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
-import java.util.Objects;
 
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
         entityManagerFactoryRef = "h2memEntityManagerFactory",
         transactionManagerRef = "h2memTransactionManager",
-        basePackages = "com.std.mdbc.repos.PrimaryRepo")
+        basePackages = "com.std.mdbc.dataaccess.repos.primaryrepo")
 public class Db1Conf {
-
 
     @Bean(name = "h2memDataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
@@ -34,7 +33,6 @@ public class Db1Conf {
         return DataSourceBuilder
                 .create()
                 .url("jdbc:h2:mem:testdb")
-                .driverClassName("org.hibernate.dialect.H2Dialect")
                 .build();
     }
 
@@ -44,19 +42,19 @@ public class Db1Conf {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
 
-
         LocalContainerEntityManagerFactoryBean builder1 = builder
                 .dataSource(dataSource())
                 .packages("com.std.mdbc.models.primaries")
                 .persistenceUnit("UserH2")
                 .build();
         builder1.setJpaVendorAdapter(vendorAdapter);
+        HashMap<String, Object> properties = new HashMap<>(){
 
-        HashMap<String, Object> properties = new HashMap<>();
+        };
 
-        properties.put("hibernate.hbm2ddl.auto","update");
+        properties.put("hibernate.hbm2ddl.auto","create-drop");
         properties.put("hibernate.dialect","org.hibernate.dialect.H2Dialect");
-        properties.put("spring.jpa.show-sql","true");
+        properties.put("hibernate.show-sql",true);
         builder1.setJpaPropertyMap(properties);
         return builder1;
     }
@@ -69,7 +67,8 @@ public class Db1Conf {
     }
 
     @Bean
-    public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
+    @Primary
+    public EntityManagerFactoryBuilder H2EntityManagerFactoryBuilder() {
         return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
     }
 }

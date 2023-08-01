@@ -1,10 +1,8 @@
-package com.std.mdbc.RepoConfig;
+package com.std.mdbc.configs.repoconfig;
 
 import jakarta.persistence.EntityManagerFactory;
-import lombok.Data;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -26,7 +24,7 @@ import java.util.HashMap;
 @EnableJpaRepositories(
         entityManagerFactoryRef = "Db2EntityManagerFactory",
         transactionManagerRef = "Db2TransactionManager",
-        basePackages = {"com.std.mdbc.repos.secondaryrepo"})
+        basePackages = "com.std.mdbc.dataaccess.repos.secondaryrepo")
 
 public class Db2Conf {
 
@@ -73,7 +71,7 @@ public class Db2Conf {
         LocalContainerEntityManagerFactoryBean builder1 = builder
                 .dataSource(dataSource)
                 .packages("com.std.mdbc.models.secondaries")
-                .persistenceUnit("UserDb2")
+                .persistenceUnit("Db2User")
                 .build();
         builder1.setJpaVendorAdapter(vendorAdapter);
 
@@ -92,6 +90,9 @@ public class Db2Conf {
         return new JpaTransactionManager(liteEntityManagerFactory);
     }
 
-
+    @Bean
+    public EntityManagerFactoryBuilder liteEntityManagerFactoryBuilder() {
+        return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
+    }
 
 }

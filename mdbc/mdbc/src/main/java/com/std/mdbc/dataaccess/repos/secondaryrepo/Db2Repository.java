@@ -1,4 +1,4 @@
-package com.std.mdbc.repos.secondaryrepo;
+package com.std.mdbc.dataaccess.repos.secondaryrepo;
 import com.std.mdbc.models.secondaries.UserDb2;
 import org.springframework.data.jpa.repository.JpaRepository;
 

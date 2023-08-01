@@ -16,7 +16,7 @@ public class UserDb2 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -24,5 +24,9 @@ public class UserDb2 {
     @Column(name="isactive")
     private Boolean isActive;
 
-    // getter-setter ve diğer alanlar
+    public UserDb2(String name, Boolean isActive) {
+        this.name = name;
+        this.isActive = isActive;
+    }
+// getter-setter ve diğer alanlar
 }
