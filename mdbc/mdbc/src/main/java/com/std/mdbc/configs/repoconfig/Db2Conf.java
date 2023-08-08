@@ -29,23 +29,23 @@ import java.util.HashMap;
 public class Db2Conf {
 
 //    @Value("${pring.datasource.db2.driver-class-name}")
-//    private String sqliteDriverClassName;
+//    private String sqpgDriverClassName;
 //
 //    @Value("${spring.datasource.db2.url}")
-//    private String sqliteUrl;
+//    private String sqpgUrl;
 //
 //    @Value("${spring.datasource.db2.username}")
-//    private String sqliteUsername;
+//    private String sqpgUsername;
 //
 //    @Value("${spring.db2.jpa.driver-class-name}")
-//    private String sqlitePassword;
+//    private String sqpgPassword;
 //
 //    @Bean(name = "Db2DataSource")
-//    public DataSource sqliteDataSource() {
+//    public DataSource sqpgDataSource() {
 //        return DataSourceBuilder.create()
-//                .url(getsqliteUrl)
-//                .username(sqliteUsername)
-//                .password(sqlitePassword)
+//                .url(getsqpgUrl)
+//                .username(sqpgUsername)
+//                .password(sqpgPassword)
 //                .driverClassName("org.hibernate.dialect.PostgreSQLDialect")
 //                .build();
 //    }
@@ -62,7 +62,7 @@ public class Db2Conf {
 
 
     @Bean(name = "Db2EntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean liteEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("Db2DataSource") DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean pgEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("Db2DataSource") DataSource dataSource) {
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
@@ -77,8 +77,8 @@ public class Db2Conf {
 
         HashMap<String, Object> properties = new HashMap<>();
 
-        properties.put("hibernate.hbm2ddl.auto","update");
-        properties.put("spring.jpa.show-sql","true");
+        properties.put("hibernate.hbm2ddl.auto","create");
+        properties.put("show-sql","true");
         properties.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
         builder1.setJpaPropertyMap(properties);
         return builder1;
@@ -86,12 +86,12 @@ public class Db2Conf {
     }
 
     @Bean(name = "Db2TransactionManager")
-    public PlatformTransactionManager liteTransactionManager(@Qualifier("Db2EntityManagerFactory") EntityManagerFactory liteEntityManagerFactory) {
-        return new JpaTransactionManager(liteEntityManagerFactory);
+    public PlatformTransactionManager pgTransactionManager(@Qualifier("Db2EntityManagerFactory") EntityManagerFactory pgEntityManagerFactory) {
+        return new JpaTransactionManager(pgEntityManagerFactory);
     }
 
     @Bean
-    public EntityManagerFactoryBuilder liteEntityManagerFactoryBuilder() {
+    public EntityManagerFactoryBuilder pgEntityManagerFactoryBuilder() {
         return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
     }
 
