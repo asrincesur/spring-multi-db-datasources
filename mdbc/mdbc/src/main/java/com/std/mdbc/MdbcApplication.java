@@ -16,18 +16,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAspectJAutoProxy
 public class MdbcApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		ApplicationContext context = SpringApplication.run(MdbcApplication.class, args);
-		H2Repository h2Repository = context.getBean(H2Repository.class);
-		Db2Repository db2Repository = context.getBean(Db2Repository.class);
+        ApplicationContext context = SpringApplication.run(MdbcApplication.class, args);
+        H2Repository h2Repository = context.getBean(H2Repository.class);
+        Db2Repository db2Repository = context.getBean(Db2Repository.class);
 
 
-		UserH2 userH2 = new UserH2("Jean");
-		UserDb2 userDb2 = new UserDb2("Ulug",true);
+        UserH2 userH2 = new UserH2("Jean", 3L);
+        UserDb2 userDb2 = new UserDb2("Ulug", true, 2L);
 
-		db2Repository.save(userDb2);
-		h2Repository.save(userH2);
-	}
+        db2Repository.save(userDb2);
+        h2Repository.save(userH2);
+    }
 
 }

@@ -7,6 +7,7 @@ import com.std.mdbc.dataaccess.repos.secondaryrepo.Db2Repository;
 import com.std.mdbc.models.IBaseEntity;
 import com.std.mdbc.models.primaries.UserH2;
 import com.std.mdbc.models.secondaries.UserDb2;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -31,6 +32,7 @@ public class UserManager implements UserService{
         userH2s.stream().forEach(System.out::println);
         userDb2s.stream().forEach(System.out::println);
         LinkedList<IBaseEntity> list = new LinkedList<>();
+        userDb2s.stream().forEach(x -> System.out.println(x.getUserPositions()));
         list.addAll(userH2s);
         list.addAll(userDb2s);
         return list;

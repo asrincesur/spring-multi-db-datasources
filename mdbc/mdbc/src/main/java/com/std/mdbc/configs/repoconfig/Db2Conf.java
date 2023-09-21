@@ -77,7 +77,7 @@ public class Db2Conf {
 
         HashMap<String, Object> properties = new HashMap<>();
 
-        properties.put("hibernate.hbm2ddl.auto","create");
+        properties.put("hibernate.hbm2ddl.auto","update");
         properties.put("show-sql","true");
         properties.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
         builder1.setJpaPropertyMap(properties);
